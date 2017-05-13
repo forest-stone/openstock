@@ -1,4 +1,15 @@
 from django.shortcuts import render
+from .models import stock
+import time
+
+# Create your tests here.
+
+while(1) :
+    time.sleep(60)
+    print("getstock")
+    for stock in stock.objects.all() :
+        stock.checkNow()
+
 """
 from rest_framework.generics import ListAPIView
 

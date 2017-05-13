@@ -13,14 +13,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='stock',
             fields=[
-                ('stockCode', models.CharField(primary_key=True, max_length=10, serialize=False)),
-                ('now', models.IntegerField()),
-                ('diff', models.IntegerField(blank=True, null=True)),
-                ('rate', models.FloatField(blank=True, null=True)),
-                ('high', models.IntegerField(blank=True, null=True)),
-                ('low', models.IntegerField(blank=True, null=True)),
-                ('quant', models.IntegerField(blank=True, null=True)),
-                ('marketSum', models.IntegerField(blank=True, null=True)),
+                ('stockCode', models.CharField(serialize=False, max_length=10, primary_key=True)),
+                ('now', models.IntegerField(blank=True, null=True)),
+                ('recommendNum', models.IntegerField(blank=True, null=True)),
             ],
         ),
     ]

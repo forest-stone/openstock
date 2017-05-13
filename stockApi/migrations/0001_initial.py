@@ -14,12 +14,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='item',
             fields=[
-                ('title', models.CharField(max_length=10)),
-                ('url', models.URLField(primary_key=True, serialize=False)),
+                ('url', models.URLField(serialize=False, primary_key=True)),
+                ('title', models.CharField(max_length=20)),
+                ('leadingPeriod', models.IntegerField()),
+                ('leadingType', models.CharField(max_length=10)),
                 ('stockNum', models.IntegerField()),
-                ('stock1Code', models.CharField(max_length=10)),
-                ('stock2Code', models.CharField(null=True, max_length=10)),
-                ('stock3Code', models.CharField(null=True, max_length=10)),
+                ('stockCode', models.CharField(max_length=20)),
+                ('stockNow', models.CharField(max_length=30)),
                 ('createDate', models.DateTimeField(default=django.utils.timezone.now)),
             ],
         ),

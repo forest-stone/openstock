@@ -39,7 +39,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'stockScreener',
     'stockApi',
-    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
