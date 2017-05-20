@@ -16,21 +16,21 @@ class item(models.Model):
     def showitem(self):
         tempCodeList = self.stockCode.split(',')
         tempNowList = self.stockNow.split(',')
-        rate = 0;
+        rate = 0
+        tempNow = ""
         print(self.url)
         i = 0
         try:
             for tempCode in tempCodeList :
                 tempStock = stock.objects.get(stockCode=tempCode)
-                tempRate = (tempStock.now - int(tempNowList[i])) / 100
-                rate += tempRate
-                i = i + 1
+                print(tempStock.now)
+                tempNow += (str(tempStock.now) +",")
         except:
             rate = 0
             print("rate error")
 
-        rate = rate / 3
-        print(rate)
+#        rate = rate / 3
+#        print(rate)
 
         return dict(
             url=self.url,
@@ -39,7 +39,8 @@ class item(models.Model):
             leadingType = self.leadingType,
             stockNum=self.stockNum,
             stockCode=self.stockCode,
-            stockRate = rate)
+            stockNow=tempNow,)
+#            stockRate = rate)
 #createDate=self.createDate.day
 
 

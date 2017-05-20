@@ -1,16 +1,28 @@
 from django.shortcuts import render
 from .models import stock
 import time
+import pandas as pd
+import pandas_datareader.data as web
+from datetime import datetime
 
 # Create your tests here.
 
-while(1) :
-    time.sleep(60)
-    print("getstock")
-    for stock in stock.objects.all() :
-        stock.checkNow()
+def getStockNow(request):
+    
+    gs = web.DataReader("025620.KQ", "yahoo", datetime(2017, 5, 1), datetime(2017, 5, 17))
+    print(gs.tail())
 
 """
+    while(1) :
+        time.sleep(5)
+        print("getstock")
+        for stocktemp in stock.objects.all() :
+            stocktemp.checkNow()
+"""
+"""
+def getStockMA5(request):
+    
+
 from rest_framework.generics import ListAPIView
 
 from stockScreener.models import stock

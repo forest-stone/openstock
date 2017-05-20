@@ -3,7 +3,12 @@ from django.contrib import admin
 
 #from .views import stockListAPIView
 
+from .views import (
+    getStockNow,
+)
+
 urlpatterns = [
+    url(r'^get/$', getStockNow, name='getStockNow'),
     # Examples:
     # url(r'^$', 'openStock.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),

@@ -25,7 +25,7 @@ SECRET_KEY = 'y&jer3=+mat464*pmr6-y071=ynlxr^=^a$8$*6^r&o8wh8i^k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ec2-52-79-211-101.ap-northeast-2.compute.amazonaws.com','localhost','127.0.0.1' ]
 
 
 # Application definition

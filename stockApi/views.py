@@ -18,8 +18,14 @@ def parsingJson(request):
     print (jsonString)
     dict = json.loads(jsonString)
     print ("Create URL data")
-    print(dict['url'] + " | " + dict["title"] + " | " + dict["leadingPeriod"]
-          + " | " + dict["leadingType"] + " | " + dict['stockNum'] + " | " + dict['stockCode'])
+    print(dict['url'])
+    print(dict['title'])
+    print(dict['leadingPeriod'])
+    print(dict['leadingType'])
+    print(dict['stockNum'])
+    print(dict['stockCode'])   
+# print(dict['url'] + " | " + dict["title"] + " | " + dict["leadingPeriod"]
+#          + " | " + dict["leadingType"] + " | " + dict['stockNum'] + " | " + dict['stockCode'])
   except:
     print("Json error")
     # json error code : 2

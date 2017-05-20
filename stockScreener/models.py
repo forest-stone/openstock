@@ -18,6 +18,8 @@ class stock(models.Model):
     recommendNum = models.IntegerField(null=True, blank=True)
 
     def checkNow(self):
+        print("checkNow")
+        print(self.stockCode)
         url = "http://api.finance.naver.com/service/itemSummary.nhn?itemcode="+self.stockCode
         getData = requests.get(url)
         replaceData = getData.text[1:-1].replace('"','').split(',')
