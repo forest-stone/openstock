@@ -5,10 +5,12 @@ from django.contrib import admin
 
 from .views import (
     getStockNow,
+    getStockMA,
 )
 
 urlpatterns = [
-    url(r'^get/$', getStockNow, name='getStockNow'),
+    url(r'^getNow/$', getStockNow, name='getStockNow'),
+    url(r'^getMA/$', getStockMA, name='getStockMA'),
     # Examples:
     # url(r'^$', 'openStock.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
