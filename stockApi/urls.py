@@ -12,8 +12,6 @@ from .views import (
 urlpatterns = [
     # Examples:
     # url(r'^$', 'openStock.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-    # url(r'^$', views.showlist, name='showlist')
     url(r'^create/$', parsingJson, name='create'),
     url(r'^list/$', showlist, name='create'),
 

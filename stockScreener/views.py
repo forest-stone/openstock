@@ -1,44 +1,64 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from .models import stock
 import time
-
+import json
 
 # Create your tests here.
+
 stopScreen = False
 
-def getStockNow(request):
+def startStockNow(request):
+    print("startStockNow - start")
+    global stopScreen
+    stopScreen = False
+
     while(1) :
-        if(stopScreen)
+        print(stopScreen)
+        if(stopScreen):
             break
 
-        time.sleep(10)
-        print("getStockNow - start")
         for stocktemp in stock.objects.all() :
             stocktemp.checkStockNow()
+        time.sleep(10)
 
+def stopStockNow(request):
+    print("stopStockNow - start")
+    global stopScreen
 
-def getStockMA(request):
-        print("getStockMA - start")
-        for stocktemp in stock.objects.all() :
-                stocktemp.checkStockMA()
+    stopScreen = True
+    print(stopScreen)
+    return HttpResponse("")
 
-"""
-    stockItem = '119500'
+def startStockMA(request):
+    print("startStockMA - start")
+    for stocktemp in stock.objects.all() :
+        stocktemp.checkStockMA()
+    return HttpResponse("")
 
-    url = 'http://finance.daum.net/item/quote_avg_yyyymmdd_sub2.daum?code=' + stockItem
-    html = urlopen(url)
-    source = BeautifulSoup(html.read(), "html.parser")
-    srlists=source.find_all("tr")
-    isCheckNone = None
+def addStockCode(request):
+    print("addStockCode - start")
+    try:
+        jsonString = request.GET['JSON']
+        print (jsonString)
+        dict = json.loads(jsonString)
+        print("addStockCode - code : " + dict['stockCode'])
 
-    if(srlists[2].span != isCheckNone):
-        #print(srlists[2])
-        #print(srlists[2].find_all("td",class_="datetime2")[0].text) #날짜
-        print(srlists[2].find_all("td",class_="num")[3].text) #5일선
-        #print(srlists[2].find_all("td",class_="num")[4].text) #10일선
-        print(srlists[2].find_all("td",class_="num")[5].text) #20일선
-        print(srlists[2].find_all("td",class_="num")[6].text) #60일선
-        #print(srlists[2].find_all("td",class_="num")[7].text) #120일선
+    except:
+        print("addStockCode - Json error")
+        # json error code : 2
+        return HttpResponse("[{\"result\": 2}]")
 
-# Create your views here.
-"""
+    tempStock = stock(stockCode=dict['stockCode'], now=0 , rate=0, ma5=0, ma20=0, ma60=0)
+    try:
+        tempStock.save(force_insert=True)
+        print("addStockCode - Save Stock")
+        return HttpResponse("[{\"result\": 1}]")
+    except:
+        print("addStockCode - Stock already exist")
+        return HttpResponse("[{\"result\": 3}]")
+
+def showStockInfo(request):
+    print("showStockInfo")
+    results = [stock.showStockInfo() for stock in stock.objects.all()]
+    return HttpResponse(json.dumps(results, indent=4), content_type="application/json")

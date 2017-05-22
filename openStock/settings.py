@@ -38,8 +38,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'stockScreener',
+#    'maPushApi',
 #    'stockApi',
-    'kakaoApi',
+#    'kakaoApi',
 )
 
 MIDDLEWARE_CLASSES = (

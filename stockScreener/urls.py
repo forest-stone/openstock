@@ -4,13 +4,19 @@ from django.contrib import admin
 #from .views import stockListAPIView
 
 from .views import (
-    getStockNow,
-    getStockMA,
+    startStockNow,
+    stopStockNow,
+    startStockMA,
+    addStockCode,
+    showStockInfo,
 )
 
 urlpatterns = [
-    url(r'^getNow/$', getStockNow, name='getStockNow'),
-    url(r'^getMA/$', getStockMA, name='getStockMA'),
+    url(r'^startStockNow/$', startStockNow, name='startStockNow'),
+    url(r'^stopStockNow/$', stopStockNow, name='stopStockNow'),
+    url(r'^startStockMA/$', startStockMA, name='startStockMA'),
+    url(r'^addStockCode/$', addStockCode, name='addStockCode'),
+    url(r'^showStockInfo/$', showStockInfo, name='showStockInfo'),
     # Examples:
     # url(r'^$', 'openStock.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),

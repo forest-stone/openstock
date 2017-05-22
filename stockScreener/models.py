@@ -14,7 +14,7 @@ class stock(models.Model):
     ma20 = models.IntegerField(null=True, blank=True)
     ma60 = models.IntegerField(null=True, blank=True)
     #diff = models.IntegerField(null=True, blank=True)
-    #rate = models.FloatField(null=True, blank=True)
+    rate = models.FloatField(null=True, blank=True)
     #high = models.IntegerField(null=True, blank=True)
     #low = models.IntegerField(null=True, blank=True)
     #quant = models.IntegerField(null=True, blank=True)
@@ -27,9 +27,12 @@ class stock(models.Model):
         url = "http://api.finance.naver.com/service/itemSummary.nhn?itemcode="+self.stockCode
         getData = requests.get(url)
         replaceData = getData.text[1:-1].replace('"','').split(',')
-        temp = replaceData[11].split(':')
-        self.now = temp[1]
+        tempNow = replaceData[11].split(':')
+        tempRate = replaceData[3].split(':')
+        self.now = tempNow[1]
+        self.rate = tempRate[1]
         print(self.now)
+        print(self.rate)
         self.save()
 
     def checkStockMA(self):
@@ -43,18 +46,26 @@ class stock(models.Model):
             #print(srlists[2])
             #print(srlists[2].find_all("td",class_="datetime2")[0].text) #날짜
             print(srlists[2].find_all("td",class_="num")[3].text) #5일선
-            self.ma5 = srlists[2].find_all("td",class_="num")[3]
+            self.ma5 = int(srlists[2].find_all("td",class_="num")[3].text.strip().replace(",",""))
             #print(srlists[2].find_all("td",class_="num")[4].text) #10일선
             print(srlists[2].find_all("td",class_="num")[5].text) #20일선
-            self.ma20 = srlists[2].find_all("td",class_="num")[5]
+            self.ma20 = int(srlists[2].find_all("td",class_="num")[5].text.strip().replace(",",""))
             print(srlists[2].find_all("td",class_="num")[6].text) #60일선
-            self.ma60 = srlists[2].find_all("td",class_="num")[6]
+            self.ma60 = int(srlists[2].find_all("td",class_="num")[6].text.strip().replace(",",""))
             #print(srlists[2].find_all("td",class_="num")[7].text) #120일선
-
         self.save()
 
     def checkRecommendNum(self):
         return self.recommendNum
+
+    def showStockInfo(self):
+        return dict(
+            stockCode=self.stockCode,
+            now = self.now,
+            rate = self.rate,
+            ma5 = self.ma5,
+            ma20 = self.ma20,
+            ma60 = self.ma60,)
 
 #import sys
 #import requests
